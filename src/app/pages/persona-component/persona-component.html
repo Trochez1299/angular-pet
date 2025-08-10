@@ -1,0 +1,156 @@
+<div class="container mt-4">
+  <h2>Gestión de Personas</h2>
+  <button class="btn btn-primary me-2" routerLink="/dashboard">
+    Volver al dashboard
+  </button>
+
+  <form (ngSubmit)="savePersona()" class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="persona.nombre"
+        name="nombre"
+        required
+      />
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Contacto</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="persona.contacto"
+        name="contacto"
+      />
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        [(ngModel)]="persona.email"
+        name="email"
+      />
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Preferencia Raza</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="persona.preferencia_raza"
+        name="preferencia_raza"
+      />
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Preferencia Tamaño</label>
+      <select
+        class="form-select"
+        [(ngModel)]="persona.preferencia_tamano"
+        name="preferencia_tamaño"
+      >
+        <option value="Pequeño">Pequeño</option>
+        <option value="Mediano">Mediano</option>
+        <option value="Grande">Grande</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Estado</label>
+      <select class="form-select" [(ngModel)]="persona.estado" name="estado">
+        <option value="Activo">Activo</option>
+        <option value="Inactivo">Inactivo</option>
+      </select>
+    </div>
+    <div class="col-12">
+      <label class="form-label">Rol ID</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="persona.rol_id"
+        name="rol_id"
+      />
+    </div>
+
+    <div class="col-12 mt-3">
+      <button class="btn btn-primary" type="submit">Guardar Persona</button>
+    </div>
+  </form>
+
+  <hr />
+
+  <h3>Personas Registradas</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Contacto</th>
+        <th>Raza</th>
+        <th>Tamaño</th>
+        <th>Estado</th>
+        <th>Rol ID</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of personas">
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.email }}</td>
+        <td>{{ p.contacto }}</td>
+        <td>{{ p.preferencia_raza }}</td>
+        <td>{{ p.preferencia_tamano }}</td>
+        <td>{{ p.estado }}</td>
+        <td>{{ p.rol_id }}</td>
+        <td>
+          <button
+            class="btn btn-danger btn-sm me-2"
+            (click)="deletePersona(p.id!)"
+          >
+            Eliminar
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Actualizar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">...</div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

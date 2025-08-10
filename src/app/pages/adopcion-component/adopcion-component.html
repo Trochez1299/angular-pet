@@ -1,0 +1,102 @@
+<div class="container mt-4">
+  <h3 class="mb-4">
+    {{ adopcion.id ? "Editar Adopción" : "Registrar Adopción" }}
+  </h3>
+  <button class="btn btn-primary me-2" routerLink="/dashboard">
+    Volver al dashboard
+  </button>
+
+  <form (ngSubmit)="saveAdopcion()" class="row g-3">
+    <div class="col-md-4">
+      <label class="form-label">ID Mascota</label>
+      <input
+        [(ngModel)]="adopcion.mascota_id"
+        name="mascota_id"
+        type="number"
+        class="form-control"
+        placeholder="Ej. 1"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">ID Persona</label>
+      <input
+        [(ngModel)]="adopcion.persona_id"
+        name="persona_id"
+        type="number"
+        class="form-control"
+        placeholder="Ej. 2"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Estado</label>
+      <select [(ngModel)]="adopcion.estado" name="estado" class="form-select">
+        <option value="Interesado">Interesado</option>
+        <option value="Adoptado">Adoptado</option>
+        <option value="Rechazado">Rechazado</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Fecha Visita</label>
+      <input
+        [(ngModel)]="adopcion.fecha_visita"
+        name="fecha_visita"
+        type="date"
+        class="form-control"
+      />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Fecha Adopción</label>
+      <input
+        [(ngModel)]="adopcion.fecha_adopcion"
+        name="fecha_adopcion"
+        type="date"
+        class="form-control"
+      />
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">
+        {{ adopcion.id ? "Actualizar" : "Guardar" }}
+      </button>
+    </div>
+  </form>
+
+  <hr class="my-4" />
+
+  <h4>Lista de Adopciones</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Mascota ID</th>
+        <th>Persona ID</th>
+        <th>Estado</th>
+        <th>Visita</th>
+        <th>Adopción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of adopciones">
+        <td>{{ a.id }}</td>
+        <td>{{ a.mascota_id }}</td>
+        <td>{{ a.persona_id }}</td>
+        <td>{{ a.estado }}</td>
+        <td>{{ a.fecha_visita }}</td>
+        <td>{{ a.fecha_adopcion }}</td>
+        <td>
+          <button (click)="editAdopcion(a)" class="btn btn-sm btn-warning me-2">
+            Editar
+          </button>
+          <button (click)="deleteAdopcion(a.id!)" class="btn btn-sm btn-danger">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

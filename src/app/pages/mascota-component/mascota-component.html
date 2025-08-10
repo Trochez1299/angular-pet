@@ -1,0 +1,112 @@
+<div class="container mt-4">
+  <h3 class="mb-4">
+    {{ mascota.id ? "Editar Mascota" : "Registrar Mascota" }}
+  </h3>
+  <button class="btn btn-primary me-2" routerLink="/dashboard">
+    Volver al dashboard
+  </button>
+
+  <form
+    (ngSubmit)="mascota.id ? updateMascota() : saveMascota()"
+    class="row g-3"
+  >
+    <div class="col-md-6">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input
+        [(ngModel)]="mascota.nombre"
+        name="nombre"
+        id="nombre"
+        class="form-control"
+        placeholder="Nombre"
+      />
+    </div>
+
+    <div class="col-md-6">
+      <label for="edad" class="form-label">Edad</label>
+      <input
+        [(ngModel)]="mascota.edad"
+        name="edad"
+        id="edad"
+        type="number"
+        class="form-control"
+        placeholder="Edad"
+      />
+    </div>
+
+    <div class="col-md-6">
+      <label for="raza" class="form-label">Raza</label>
+      <input
+        [(ngModel)]="mascota.raza"
+        name="raza"
+        id="raza"
+        class="form-control"
+        placeholder="Raza"
+      />
+    </div>
+
+    <div class="col-md-6">
+      <label for="tamaño" class="form-label">Tamaño</label>
+      <select
+        [(ngModel)]="mascota.tamano"
+        name="tamaño"
+        id="tamaño"
+        class="form-select"
+      >
+        <option value="Pequeño">Pequeño</option>
+        <option value="Mediano">Mediano</option>
+        <option value="Grande">Grande</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label for="estado_salud" class="form-label">Estado de Salud</label>
+      <input
+        [(ngModel)]="mascota.estado_salud"
+        name="estado_salud"
+        id="estado_salud"
+        class="form-control"
+        placeholder="Estado de Salud"
+      />
+    </div>
+
+    <div class="col-md-6">
+      <label for="estado_adopcion" class="form-label">Estado de Adopción</label>
+      <select
+        [(ngModel)]="mascota.estado_adopcion"
+        name="estado_adopcion"
+        id="estado_adopcion"
+        class="form-select"
+      >
+        <option value="Disponible">Disponible</option>
+        <option value="Adoptado">Adoptado</option>
+        <option value="Pendiente">Pendiente</option>
+      </select>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">
+        {{ mascota.id ? "Actualizar" : "Guardar" }}
+      </button>
+    </div>
+  </form>
+
+  <hr class="my-4" />
+
+  <h4>Lista de Mascotas</h4>
+  <ul class="list-group">
+    <li
+      class="list-group-item d-flex justify-content-between align-items-center"
+      *ngFor="let m of mascotas"
+    >
+      <span>{{ m.nombre }} - {{ m.raza }} - {{ m.tamano }}</span>
+      <div>
+        <button (click)="editMascota(m)" class="btn btn-sm btn-warning me-2">
+          Editar
+        </button>
+        <button (click)="deleteMascota(m.id!)" class="btn btn-sm btn-danger">
+          Eliminar
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
